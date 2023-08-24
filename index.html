@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<h1 id="header" class="page-header">Oh the places you will go!</h1>
+<!-- reference to Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="">
+
+<!-- reference to Leaflet JavaScript -->
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+</head>
+
+<body>
+<style>
+button{background-color:#000000;border:1px solid #fff;border-radius:5px;color:#fff;display:-webkit-flex;display:flex;font-family:courier,monospace;font-size:14px;height:30px;margin:0 0 7px 10px;min-width:35px;padding:0 5px;position:relative;text-align:center;top:125px;z-index:999}
+button#top{border:none;background:transparent;color:#000000;font-size:15px;font-weight:bolder;top:114px}
+h1#header{color:green;font-family:courier,monospace;position:absolute;top:500px;text-align:center;width:100%;z-index:999}
+</style>
+
+<div id="map" style = "height:560px;position:absolute;top:27px;width:100%"></div> 
+    
+<button id="top" onclick="alert('Click any location')">
+Zoom
+<br>
+to:
+</button>
+<button onclick="flyTo( 39.78959911075947, -105.03152251289724, 'Denver')">Denver</button>
+<button onclick="flyTo( 40.766759067938466, -111.88710836495122, 'Salt Lake City')">Salt Lake City</button>
+<button onclick="flyTo( 58.3850235, -134.197786, 'Juneau')">Juneau</button>
+<button onclick="flyTo( 39.100996863354055, -94.57957546320323, 'Kansas City')">Kansas City</button>
+<button onclick="flyTo( 41.553223, -70.608589, 'Cape Cod')">Cape Cod</button>
+
+<script>
+const mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
+const mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+ 
+var osm = L.tileLayer('https://api.maptiler.com/maps/outdoor/{z}/{x}/{y}.png?key=HmFw65ohtlrYxPUniiUD', {
+            maxZoom: 19,
+            attribution: '© maptiler © OpenStreetMap' 
+           }); 
+
+const map = L.map('map', {
+        center: [39.73, -104.99],
+        zoom: 4,
+        layers: [osm]
+    });
+
+const snowbird = L.marker([40.5818948, -111.655202400000]).bindPopup('<h1>Snowbird</h1> <img src="slc.jpg" width = "250" height = "350" />').addTo(map);
+const bondog = L.marker([40.7904323, -111.8649402]).bindPopup('<h1>We pick up a travelling companion...Bonnie! </h1> <img src="bondog.jpeg" width = "250" height = "275" />').addTo(map);
+const peterson = L.marker([58.4360247, -134.7251433]).bindPopup('<h1>Engaged at Peterson Lake! </h1> <img src="peterson.jpg" width = "250" height = "275" />').addTo(map);
+const tracy = L.marker([57.8402612, -133.1085223]).bindPopup('<h1>Tracy Arm Fjord</h1> <img src="tracy.jpeg" width = "250" height = "275" />').addTo(map);
+const lawrence = L.marker([38.970204, -95.2077812]).bindPopup('<h1>One of our favorite trails</h1> <img src="lawrence.jpeg" width = "250" height = "275" />').addTo(map);
+
+
+function flyTo(lat,lon,name){map.flyTo([lat,lon],8);}
+
+</script>
+</body>
+</html>
