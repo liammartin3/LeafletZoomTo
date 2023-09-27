@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<h1 id="header" class="page-header">Oh the places you will go!</h1>
+<h3 id="header" class="page-header">The only place that matters, is by your side</h3>
 <!-- reference to Leaflet CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="">
 
 <!-- reference to Leaflet JavaScript -->
 <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+<script src="js/leaflet-providers.js"></script>
 </head>
 
 <body>
 <style>
 button{background-color:#000000;border:1px solid #fff;border-radius:5px;color:#fff;display:-webkit-flex;display:flex;font-family:courier,monospace;font-size:14px;height:30px;margin:0 0 7px 10px;min-width:35px;padding:0 5px;position:relative;text-align:center;top:125px;z-index:999}
 button#top{border:none;background:transparent;color:#000000;font-size:15px;font-weight:bolder;top:114px}
-h1#header{color:green;font-family:courier,monospace;position:absolute;top:500px;text-align:center;width:100%;z-index:999}
+h3#header{color:rgb(0, 0, 0);font-family:courier,monospace;position:absolute;top:500px;text-align:center;width:100%;z-index:999}
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {color:#fff ;background-color: #000;}
+
+#video-container {
+    max-width: 300px; /* Adjust as needed */
+  }
+
+  video {
+    width: 250px;
+    height: 300px;
+  }
 </style>
 
 <div id="map" style = "height:560px;position:absolute;top:27px;width:100%"></div> 
@@ -23,35 +34,70 @@ Zoom
 <br>
 to:
 </button>
-<button onclick="flyTo( 39.78959911075947, -105.03152251289724, 'Denver')">Denver</button>
-<button onclick="flyTo( 40.766759067938466, -111.88710836495122, 'Salt Lake City')">Salt Lake City</button>
-<button onclick="flyTo( 58.3850235, -134.197786, 'Juneau')">Juneau</button>
-<button onclick="flyTo( 39.100996863354055, -94.57957546320323, 'Kansas City')">Kansas City</button>
-<button onclick="flyTo( 41.553223, -70.608589, 'Cape Cod')">Cape Cod</button>
+
+<button onclick="flyTo( 39.78959911075947, -105.03152251289724, 'Colorado')">Colorado</button>
+<button onclick="flyTo( 40.70759067938466, -111.88710836495122, 'Salt Lake City')">Salt Lake City</button>
+<button onclick="flyTo( 37.858591, -111.493327, 'Southern Utah')">Southern Utah</button>
+<button onclick="flyTo( 58.200, -134.197786, 'Juneau')">Juneau</button>
+<button onclick="flyTo( 39.002377, -95.052264, 'Kansas')">Kansas</button>
+<button onclick="flyTo( 39.068355, -94.840670, 'Lake of the Forest')">Lake of the Forest</button>
+<button onclick="flyTo( 42.053223, -70.608589, 'Massachusetts')">Massachusetts</button>
 
 <script>
-const mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
-const mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
- 
-var osm = L.tileLayer('https://api.maptiler.com/maps/outdoor/{z}/{x}/{y}.png?key=HmFw65ohtlrYxPUniiUD', {
-            maxZoom: 19,
-            attribution: '© maptiler © OpenStreetMap' 
-           }); 
-
 const map = L.map('map', {
-        center: [39.73, -104.99],
-        zoom: 4,
-        layers: [osm]
+        center: [39.73, -95.99],
+        zoom: 4
     });
 
-const snowbird = L.marker([40.5818948, -111.655202400000]).bindPopup('<h1>Snowbird</h1> <img src="slc.jpg" width = "250" height = "350" />').addTo(map);
-const bondog = L.marker([40.7904323, -111.8649402]).bindPopup('<h1>We pick up a travelling companion...Bonnie! </h1> <img src="bondog.jpeg" width = "250" height = "275" />').addTo(map);
-const peterson = L.marker([58.4360247, -134.7251433]).bindPopup('<h1>Engaged at Peterson Lake! </h1> <img src="peterson.jpg" width = "250" height = "275" />').addTo(map);
-const tracy = L.marker([57.8402612, -133.1085223]).bindPopup('<h1>Tracy Arm Fjord</h1> <img src="tracy.jpeg" width = "250" height = "275" />').addTo(map);
-const lawrence = L.marker([38.970204, -95.2077812]).bindPopup('<h1>One of our favorite trails</h1> <img src="lawrence.jpeg" width = "250" height = "275" />').addTo(map);
+const bondog = L.marker([40.7904323, -111.8649402]).bindPopup('<h4>July 2021: Shoreline Trail</h4> <h5>We pick up a travelling companion<br>...and a trouble maker, Bonnie!</h5> <img src="photos/utah/bondog.jpeg" width = "225" height = "275" />').addTo(map);
+const peterson = L.marker([58.4360247, -134.7251433]).bindPopup('<h4>August 2022: Peterson Lake</h4> <h5>Our amazing friend Grace (who lives in Juneau) introduced Amanda and I back in 2016. so I thought it would be fitting to ask Amanda to marry me with the help of the same person that introudced us... and Grace more than delivered by planning a back packing trip in the Tongass National Forest and this was the end result :) </h5> <img src="photos/juneau/peterson.jpg" width = "225" height = "275" />').addTo(map);
+const tracy = L.marker([57.8402612, -133.1085223]).bindPopup('<h4>August 2022: Tracy Arm Fjord</h4> <h5>On the same trip that we got engaged we took a boat trip to Tracys arm fjord. I know the picture may not look like much, but it was easily one of the most stunning places I have ever been </h5> <img src="photos/juneau/tracy.jpeg" width = "225" height = "275" />').addTo(map);
+const lawrence = L.marker([38.970204, -95.2077812]).bindPopup('<h4>October 2022: Lawrence Riverfront Trail</h4> <img src="photos/kansas/lawrence.jpeg" width = "250" height = "300" />').addTo(map);
+const ptown = L.marker([42.020518,-70.193401]).bindPopup('<h4>June 2016: Wood End Lighthouse</h4> <h5>This was a hike we did on my first trip out to Boston. We drove all the way out to Province town. I think we both felt that we just had to make it all the way to the end of the cape (or at least I did lol) so we walked along the Causeway to Woods End Lighthouse. And now we are getting married on the cape 7 years later.</h5><img src="photos/mass/ptown.jpg" width = "250" height = "275" />').addTo(map);
+const kayak = L.marker([42.269600,-70.883873]).bindPopup('<h4>June 2016: Worlds End</h4> <img src="photos/mass/kayak.jpg" width = "250" height = "275" />').addTo(map);
+const hotspring = L.marker([39.011546,-106.891301]).bindPopup('<h4>July 2017: Conundrum Hot Springs</h4><h5>These are some natural hot springs outside of Aspen... you only have to hike 10 miles or so to get there. I am really glad we did this trip then because my body has started falling apart now that I am 29... didnt even <br> make it till 30 lol</h5><img src="photos/colorado/hotspring.jpg" width = "275" height = "280" />').addTo(map);
+const sanddunes = L.marker([37.7915959,-105.594327599]).bindPopup('<h4>August 2018: Great Sand Dunes National<br> Park</h4> <img src="photos/colorado/dunes.jpg" width = "275" height = "275" />').addTo(map);
+const bells = L.marker([39.070663,-106.988937]).bindPopup('<h4>August 2019: Maroon Bells Wilderness</h4><h5>Our good friend Ryan led us on a hike from Crested Butte to Aspen, with the hike ending at the Maroon Bells.</h5> <img src="photos/colorado/bells.jpg" width = "300" height = "300" />').addTo(map);
+const olympus = L.marker([40.6855029,-111.7885436]).bindPopup('<h4>June 2020: Top of Mount Olympus</h4><h6>I have always loved this picture because I think it looks like <br> Amanda is posing in front of a green screen or something, but <br> that is just the Wasatch range for you.</h6> <img src="photos/utah/olymp.jpeg" width = "275" height = "300" />').addTo(map);
+const bryce = L.marker([37.582922,-112.191506]).bindPopup('<h4>October 2020: Bryce National Park</h4><h5>Amanda and I woke up extra early to hit <br> Bryce NP and it really felt like we had the <br> whole place to ourselves. Probably my <br> favorite place in Utah.</h5> <img src="photos/south_utah/bryce.jpeg" width = "225" height = "275" />').addTo(map);
+const zion = L.marker([37.347538,-113.005103]).bindPopup('<h4>March 2021: Zion National Park</h4> <h6>This is when I leared that I have a fear of heights... it is kind of bizare it did not come up in life till this point but that is how it goes I suppose. Amanda stayed back with me even though I told her to leave me behind. Maybe she was scared too and was using me as a cop out, we will truly never know.</h6> <img src="photos/south_utah/zion.jpeg" width = "225" height = "275" />').addTo(map);
+const moab = L.marker([38.55611,-110.70778]).bindPopup('<h4>April 2022: Goblin Valley State Park</h4><h5>Colin was nice enough to share all of his <br> secret camping spots with us. </h5> <img src="photos/south_utah/moab.jpeg" width = "225" height = "275" />').addTo(map);
+const red = L.marker([40.766,-111.824]).bindPopup('<h4>April 2022: Red Butte Gardens</h4> <h5>for our good friends Teddy and Isabels <br> wedding!</h5> <img src="photos/utah/red.jpeg" width = "225" height = "275" />').addTo(map);
+const hike = L.marker([40.637306,-111.696769]).bindPopup('<h4>July 2021: Little Cottonwood Canyon </h4> <img src="photos/utah/hike.jpeg" width = "225" height = "275" />').addTo(map);
+const grand = L.marker([36.2124241,-112.06525490]).bindPopup('<h4>October 2020: North Rim, Grand Canyon National Park</h4><h6>This photo was taken on the same trip that we took to Bryce and Zion. We actually had no intention to go to the Grand Canyon on this trip but once we realized it was only a few hours from Bryce and Zion we just had to go to see what all the fuss was about. It was a great feeling to just say, why dont we just keep on going. It was a little smoky but truly an amazing sight. </h6><img src="photos/south_utah/grand.jpeg" width = "225" height = "275" />').addTo(map);
+const arch = L.marker([38.733082,-109.592514]).bindPopup('<h4>May 2021: Amanda and Rose at <br> Arches National Park</h4> <img src="photos/south_utah/arch.jpeg" width = "225" height = "275" />').addTo(map);
+const lake = L.marker([39.070597,-94.844043]).bindPopup('<h4>December 2017: New Years Eve at<br> Lake of the Forest</h4><h5>Kind of hard to believe how young we <br>both look in this photo. </h5> <img src="photos/kansas/lake.JPG" width = "225" height = "275" />').addTo(map);
+const steam = L.marker([40.484227,-106.831419]).bindPopup('<h4>July 2018: Camping near Steamboat </h4> <img src="photos/colorado/steam.JPG" width = "225" height = "275" />').addTo(map);
+const rocks = L.marker([39.665408,-105.205727]).bindPopup('<h4>July 2018: Red Rocks</h4> <img src="photos/colorado/redrocks.JPG" width = "225" height = "275" />').addTo(map);
+const duluth = L.marker([46.796029,-92.082752]).bindPopup('<h4>December 2016: Lake Superior</h4> <h6>Amanda was nice enough to come and visit me in Minnesota when I was getting my Masters. She would even visit in the winter... thats how I knew she was a keeper ;)</h6><img src="photos/minnesota/duluth.JPG" width = "320" height = "300" />').addTo(map);
+const ouray = L.marker([38.025131,-107.675880]).bindPopup('<h4>May 2016: In a cave somewhere<br>near Ouray, CO</h4><h5>Of all the adventuring and running around that<br>we have done over the years, I think this is my <br>favorite photo. Taken by Garrett Rice, I think! </h5> <img src="photos/colorado/ouray.JPG" width = "250" height = "325" />').addTo(map);
+const mpls = L.marker([44.915331,-93.211001]).bindPopup('<h4>August 2016: Minnehaha Falls outside Minneapolis</h4> <img src="photos/minnesota/mpls.JPG" width = "300" height = "300" />').addTo(map);
+const black = L.marker([38.5753936,-107.74159609]).bindPopup('<h4>May 2016: Black Canyon of the <br> Gunnison National Park</h4><img src="photos/colorado/black.JPG" width = "250" height = "300" />').addTo(map);
+const quan = L.marker([39.3972,-106.1064]).bindPopup('<h4>July 2016: Quandary Peak</h4><h5> One of the many 14ers we hiked while living <br> in Denver.</h5> <img src="photos/colorado/quan.JPG" width = "275" height = "275" />').addTo(map);
+const mutt = L.marker([38.929144,-95.322452]).bindPopup('<h4>September 2023: Mutt Run</h4><h5> I like to think that Bonnie misses Utah but really <br> loves all of the water in the Midwest. </h5> <img src="photos/kansas/mutt.jpeg" width = "250" height = "300" />').addTo(map);
+const fenway = L.marker([42.346505,-71.097359]).bindPopup('<h4>July 2023: Fenway</h4><img src="photos/mass/fenway_1.jpeg" width = "200" height = "125"/><br><img src="photos/mass/fenway_2.jpeg" width = "200" height = "200"/>').addTo(map);
+const swim = L.marker([39.069353,-94.841107]).bindPopup('<h4>June 2023: Swim lessons at the lake!</h4><div id="video-container"><video controls><source src="photos/kansas/swim.mp4" type="video/mp4"></video></div>').addTo(map);
+const golf1 = L.marker([39.065095,-94.831341]).bindPopup('<h4>October 2022</h4><img src="photos/kansas/golf1.jpeg" width = "225" height = "300" />').addTo(map);
+const golf2 = L.marker([39.067844,-94.832736]).bindPopup('<h4>October 2022</h4><img src="photos/kansas/golf2.jpeg" width = "250" height = "300"/>').addTo(map);
+const boat = L.marker([41.506418,-70.894616]).bindPopup('<h4>September 2023</h4><div id="video-container"><video controls><source src="photos/mass/boat.mp4" type="video/mp4"></video></div>').addTo(map);
+const fal = L.marker([41.539894,-70.628946]).bindPopup('<h4>September 2023</h4><img src="photos/mass/fal.jpeg" width = "250" height = "300" />').addTo(map);
 
+var watercolor = L.tileLayer.provider('Stadia.StamenWatercolor').addTo(map);
 
-function flyTo(lat,lon,name){map.flyTo([lat,lon],8);}
+function flyTo(lat, lon, name) {
+    var zoomLevel;
+    if (name === "Juneau" || name === "Southern Utah" || name === "Colorado"|| name === "Massachusetts" ) {
+        zoomLevel = 8;
+    } else if (name === "Salt Lake City" || name === "Kansas") {
+        zoomLevel = 11; 
+    } else if (name === "Lake of the Forest" ) {
+        zoomLevel = 15; 
+    }  
+    else {
+        zoomLevel = 9;
+    }
+    map.flyTo([lat, lon], zoomLevel);
+}
 
 </script>
 </body>
